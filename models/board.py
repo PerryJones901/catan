@@ -1,4 +1,3 @@
-import requests
 from typing import List
 
 from models.corner import Corner
@@ -7,8 +6,8 @@ from models.road import Road
 
 class Board:
     def __init__(self, width: int, height: int):
-        self._width = 3
-        self._height = 4
+        self._width = width
+        self._height = height
         self._corners = self._construct_corner_grid()
         self._roads = self._construct_road_grid()
         self._hexes = self._construct_hex_grid()
@@ -33,23 +32,23 @@ class Board:
     def hexes(self) -> List[List[Hex]]:
         return self._hexes
 
-    def _construct_corner_grid() -> List[List[Corner]]:
+    def _construct_corner_grid(self) -> List[List[Corner]]:
         return [self._construct_corner_row() for i in range(self.height + 1)]
 
-    def _construct_corner_row() -> List[Corner]:
+    def _construct_corner_row(self) -> List[Corner]:
         return [Corner() for i in range(2*self.width + 1)]
 
-    def _construct_road_grid() -> List[List[Road]]:
+    def _construct_road_grid(self) -> List[List[Road]]:
         return [self._construct_road_row(i) for i in range(0, 2*self.height + 1)]
 
-    def _construct_road_row(row_index: int) -> List[Road]:
-        swticher = {
+    def _construct_road_row(self, row_index: int) -> List[Road]:
+        switcher = {
             0: 2*self.width,
             1: self.width + 1,
             2: 2*self.width,
             3: self.width
         }
-        return switcher[row_index % 4]
+        return [Road() for i in range(switcher[row_index % 4])]
 
-    def _construct_hex_grid() -> List[List[Hex]]:
+    def _construct_hex_grid(self) -> List[List[Hex]]:
         return [[Hex() for i in range (self.width)] for j in range(self.height)]

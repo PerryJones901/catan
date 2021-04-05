@@ -2,7 +2,7 @@ from models.dice_roll_tile import DiceRollTile
 from models.resource import Resource
 
 class Hex:
-    def __init__(self, dice_roll_tile: DiceRollTile, resource: Resource):
+    def __init__(self, dice_roll_tile: DiceRollTile = DiceRollTile.TWO, resource: Resource = Resource.WOOD):
         self._dice_roll_tile = dice_roll_tile
         self._resource = resource
 
