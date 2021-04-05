@@ -4,7 +4,7 @@ from models.player import Player
 class Corner:
     def __init__(self):
         self._building_type = BuildingType.NONE
-        self._owner = Player.NONE
+        self._owner = None
 
     @property
     def building_type(self) -> BuildingType:
