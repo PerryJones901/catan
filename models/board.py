@@ -32,6 +32,26 @@ class Board:
     def hexes(self) -> List[List[Hex]]:
         return self._hexes
 
+    def to_string(self) -> str:
+        row_strings = []
+        for row_index in range(0, 2*self.height + 1):
+            row_string = ''
+            # Row i
+            if row_index % 2 == 0:
+                # Row with corners
+                row_corners = ['o' for j in range(len(self.corners[row_index//2]))]
+                row_string = ' --- '.join(row_corners)
+            elif row_index % 2 == 1:
+                # Row with vertical roads
+                row_roads = ['|' for j in range(len(self.roads[row_index]))]
+                row_string = '           '.join(row_roads)
+                if row_index % 4 == 3:
+                    # Indent needed
+                    row_string = '      ' + row_string
+            print(row_string)
+            row_strings.append(row_string)
+        return '\n'.join(row_strings)
+
     def _construct_corner_grid(self) -> List[List[Corner]]:
         return [self._construct_corner_row() for i in range(self.height + 1)]
 
