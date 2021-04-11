@@ -55,6 +55,8 @@ class Board:
                 if row_index % 4 == 3:
                     # Indent needed
                     row_string = '      ' + row_string
+                row_string_repeated_thrice = [row_string for j in range(3)]
+                row_string = '\n'.join(row_string_repeated_thrice)
             row_strings.append(row_string)
         return '\n'.join(row_strings)
 
