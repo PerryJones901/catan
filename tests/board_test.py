@@ -3,11 +3,8 @@ import pytest
 from models.board import Board
 import tests.board_test_constants as const
 
-def test_2x2_board():
+def test_board_road_lengths_2x2():
     b = Board(2,2)
-
-    assert len(b.corners) == 3
-    assert len(b.corners[0]) == 5
 
     assert len(b.roads) == 5
     assert len(b.roads[0]) == 4
@@ -22,7 +19,7 @@ def test_2x2_board():
     (3,2, 3,7),
     (3,3, 4,7)
 ])
-def test_corner_lengths(width, height, exp_corners_length, exp_corner_row_length):
+def test_board_corner_lengths(width, height, exp_corners_length, exp_corner_row_length):
     b = Board(width,height)
     assert len(b.corners) == exp_corners_length
     for i in range(0, len(b.corners)):
@@ -35,6 +32,6 @@ def test_corner_lengths(width, height, exp_corners_length, exp_corner_row_length
     (3,2,const.BOARD_STRINGS['3x2']),
     (3,3,const.BOARD_STRINGS['3x3'])
 ])
-def test_to_string_2x2_board(width, height, expected):
+def test_board_to_string(width, height, expected):
     b = Board(width,height)
     assert b.to_string() == expected
