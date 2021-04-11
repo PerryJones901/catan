@@ -2,7 +2,7 @@ from models.player_colour import PlayerColour
 
 class Player:
     def __init__(self, id: int, player_colour: PlayerColour):
-        self._id = 0
+        self._id = id
         self._player_colour = player_colour
 
     @property
