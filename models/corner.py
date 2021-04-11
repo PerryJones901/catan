@@ -21,3 +21,9 @@ class Corner:
     @owner.setter
     def owner(self, value):
         self._owner = value
+
+    def to_string(self):
+        if self.owner is None:
+            return 'o'
+        else:
+            return str(self.owner.id)
