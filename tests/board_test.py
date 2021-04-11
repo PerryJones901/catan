@@ -71,3 +71,41 @@ def test_board_place_building():
     assert b.corners[2][2].owner.id is 2
     assert b.corners[2][3].owner is None
     assert b.corners[2][4].owner is None
+
+def test_board_place_road():
+    b = Board(2,2)
+    players = [
+        Player(0, PlayerColour.RED), 
+        Player(1, PlayerColour.ORANGE),
+        Player(2, PlayerColour.YELLOW)
+    ]
+
+    b.place_road(players[0], 0, 0)
+    b.place_road(players[1], 0, 1)
+    b.place_road(players[1], 0, 2)
+    b.place_road(players[2], 0, 3)
+
+    b.place_road(players[0], 1, 0)
+    b.place_road(players[1], 2, 1)
+    b.place_road(players[2], 3, 1)
+
+    assert b.roads[0][0].owner.id == 0
+    assert b.roads[0][1].owner.id == 1
+    assert b.roads[0][2].owner.id == 1
+    assert b.roads[0][3].owner.id == 2
+
+    assert b.roads[1][0].owner.id == 0
+    assert b.roads[1][1].owner is None
+    assert b.roads[1][2].owner is None
+
+    assert b.roads[2][0].owner is None
+    assert b.roads[2][1].owner.id == 1
+    assert b.roads[2][2].owner is None
+
+    assert b.roads[3][0].owner is None
+    assert b.roads[3][1].owner.id == 2
+
+    assert b.roads[4][0].owner is None
+    assert b.roads[4][1].owner is None
+    assert b.roads[4][2].owner is None
+    assert b.roads[4][3].owner is None

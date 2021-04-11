@@ -39,15 +39,17 @@ class Board:
         corner.building_type = building_type
         corner.owner = player
 
+    def place_road(self, player: Player, row_index, column_index):
+        corner = self.roads[row_index][column_index]
+        corner.owner = player
+
     def to_string(self) -> str:
         row_strings = []
         for row_index in range(0, 2*self.height + 1):
             row_string = ''
             # Row i
             if row_index % 2 == 0:
-                # Row with corners
-                row_corners = [corner.to_string() for corner in self.corners[row_index//2]]
-                row_string = ' --- '.join(row_corners)
+                row_string = self._horizontal_road_string(row_index)
             elif row_index % 2 == 1:
                 # Row with vertical roads
                 row_roads = ['|' for j in self.roads[row_index]]
@@ -80,3 +82,12 @@ class Board:
 
     def _construct_hex_grid(self) -> List[List[Hex]]:
         return [[Hex() for i in range (self.width)] for j in range(self.height)]
+
+    def _horizontal_road_string(self, row_index: int):
+        sections_in_row = []
+        for column_index in range(0,2*self.width):
+            sections_in_row.append(self.corners[row_index//2][column_index].to_string())
+            sections_in_row.append(self.roads[row_index][column_index].to_string())
+        # Last corner
+        sections_in_row.append(self.corners[row_index//2][2*self.width].to_string())
+        return ' '.join(sections_in_row)
