@@ -12,9 +12,15 @@ class Road:
     def owner(self, value: Player):
         self._owner = value
 
-    def to_string(self):
+    def to_horizontal_road_string(self):
         if self.owner is None:
             middle_char = '-'
         else:
             middle_char = self.owner.id
         return f'-{middle_char}-'
+
+    def to_vertical_road_string(self):
+        if self.owner is None:
+            return '|'
+        else:
+            return str(self.owner.id)
